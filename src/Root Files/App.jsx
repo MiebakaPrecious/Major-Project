@@ -1,39 +1,39 @@
-// ==============================
-
-// App.jsx (Router Setup)
-
-// ==============================
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import { MainLayout } from "./layout/MainLayout";
-
-import { Dashboard } from "./pages/Dashboard";
-
-import { Settings } from "./pages/Settings";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function App() {
+  return (
+    <Router>
+      <Routes>
 
-return (
+        {/* Auth pages (no layout) */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-<BrowserRouter>
+        {/* Dashboard pages (with layout) */}
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
+          }
+        />
 
-<MainLayout>
+        <Route
+          path="/settings"
+          element={
+            <MainLayout>
+              <Settings />
+            </MainLayout>
+          }
+        />
 
-<Routes>
-
-<Route path="/" element={<Dashboard />} />
-
-<Route path="/settings" element={<Settings />} />
-
-</Routes>
-
-</MainLayout>
-
-</BrowserRouter>
-
-);
-
+      </Routes>
+    </Router>
+  );
 }
-
